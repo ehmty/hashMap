@@ -12,6 +12,32 @@ class HashMap {
 
     return hashCode;
   }
+
+  getBucket(key) {
+    return this.buckets[this.hash(key)];
+  }
+
+  set(key, value) {
+    const bucket = this.getBucket(key);
+
+    for (const entry of bucket) {
+      if (entry.key === key) {
+        entry.value = value;
+        return;
+      }
+    }
+
+    bucket.push({ key, value });
+    this.size++;
+  }
+
+  get(key) {
+    const bucket = this.getBucket(key);
+
+    for (const entry of bucket) {
+      if (entry.key === key) return entry.value;
+    }
+  }
 }
 
 const test = new HashMap();
