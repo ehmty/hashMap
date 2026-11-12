@@ -19,6 +19,16 @@ class HashMap {
     return this.buckets[this.hash(key)];
   }
 
+  resize() {
+    const entries = this.entries();
+    this.capacity *= 2;
+    this.buckets = Array.from({ length: this.capacity }, () => []);
+
+    for (const [key, value] of entries) {
+      this.getBucket(key).push({ key, value });
+    }
+  }
+
   set(key, value) {
     const bucket = this.getBucket(key);
 
@@ -31,6 +41,10 @@ class HashMap {
 
     bucket.push({ key, value });
     this.size++;
+
+    if (this.size / this.capacity > this.loadFactor) {
+      this.resize();
+    }
   }
 
   get(key) {
