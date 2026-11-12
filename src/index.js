@@ -64,6 +64,15 @@ class HashMap {
 
     return false;
   }
+
+  length() {
+    return this.size;
+  }
+
+  clear() {
+    this.buckets = Array.from({ length: this.capacity }, () => []);
+    this.size = 0;
+  }
 }
 
 const test = new HashMap();
@@ -71,4 +80,4 @@ const test = new HashMap();
 test.set("apple", "red");
 test.set("banana", "yellow");
 
-console.log(test);
+console.log(test.buckets);
