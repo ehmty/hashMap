@@ -1,6 +1,8 @@
 class HashMap {
   capacity = 16;
   loadFactor = 0.75;
+  buckets = Array.from({ length: this.capacity }, () => []);
+  size = 0;
 
   hash(key) {
     let hashCode = 0;
@@ -38,8 +40,35 @@ class HashMap {
       if (entry.key === key) return entry.value;
     }
   }
+
+  has(key) {
+    const bucket = this.getBucket(key);
+
+    for (const entry of bucket) {
+      if (entry.key === key) return true;
+    }
+
+    return false;
+  }
+
+  remove(key) {
+    const bucket = this.getBucket(key);
+
+    for (const entry of bucket) {
+      if (entry.key === key) {
+        bucket.splice(bucket.indexOf(entry), 1);
+        this.size--;
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
 
 const test = new HashMap();
 
-console.log(test.hash("test"));
+test.set("apple", "red");
+test.set("banana", "yellow");
+
+console.log(test);
