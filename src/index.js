@@ -73,6 +73,42 @@ class HashMap {
     this.buckets = Array.from({ length: this.capacity }, () => []);
     this.size = 0;
   }
+
+  keys() {
+    const keys = [];
+
+    for (const bucket of this.buckets) {
+      for (const entry of bucket) {
+        keys.push(entry.key);
+      }
+    }
+
+    return keys;
+  }
+
+  values() {
+    const values = [];
+
+    for (const bucket of this.buckets) {
+      for (const entry of bucket) {
+        values.push(entry.value);
+      }
+    }
+
+    return values;
+  }
+
+  entries() {
+    const entries = [];
+
+    for (const bucket of this.buckets) {
+      for (const entry of bucket) {
+        entries.push([entry.key, entry.value]);
+      }
+    }
+
+    return entries;
+  }
 }
 
 const test = new HashMap();
