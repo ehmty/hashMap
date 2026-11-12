@@ -16,7 +16,13 @@ class HashMap {
   }
 
   getBucket(key) {
-    return this.buckets[this.hash(key)];
+    const index = this.hash(key);
+
+    if (index < 0 || index >= this.buckets.length) {
+      throw new Error("Trying to access index out of bounds");
+    }
+
+    return this.buckets[index];
   }
 
   resize() {
@@ -123,3 +129,5 @@ class HashMap {
     return entries;
   }
 }
+
+export { HashMap };
