@@ -75,7 +75,6 @@ class HashMap {
         return true;
       }
     }
-
     return false;
   }
 
@@ -124,10 +123,3 @@ class HashMap {
     return entries;
   }
 }
-
-const test = new HashMap();
-
-test.set("apple", "red");
-test.set("banana", "yellow");
-
-console.log(test.buckets);
